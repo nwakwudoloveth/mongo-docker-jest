@@ -1,19 +1,22 @@
 version: '3'
 services:
   app:
-    image: sose-sw207
+    image: project-mongo-docker
     build:
       context: .
       dockerfile: Dockerfile
     environment:
-      - MONGODB_CONNECTION_STRING=mongodb://mongo/mongodb
+      # - MONGODB_USERNAME
+      # - MONGODB_PASSWORD
+      # - MONGODB_DATABASE
+      - MONGODB_CONNECTION_STRING=mongodb://mongo/mongo-docker
+      #- MONGODB_CONNECTION_STRING=mongodb+srv://Loveth:20202060@cluster0.1hrf2s4.mongodb.net/?retryWrites=true&w=majority
     ports:
       - 3000:3000
       - 35729:35729
     volumes:
       - ./src:/app/src
-      - ./test:/app/test
   mongo:
     image: mongo
     ports:
-      - 27019:27017
+      - 27017:27017
