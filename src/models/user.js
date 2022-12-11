@@ -4,12 +4,10 @@ const autopopulate = require('mongoose-autopopulate')
 const UserSchema = new mongoose.Schema({
   name: {
     type: String,
-
     required: true,
   },
   email: {
     type: String,
-
     required: true,
   },
   password: {
@@ -25,14 +23,14 @@ const UserSchema = new mongoose.Schema({
     },
   ],
 })
-
 class User {
   get profile() {
     return this.name + this.email + this.password
   }
 
-  list(newProduct) {
+  async list(newProduct) {
     this.products.push(newProduct)
+    await this.save()
   }
 
   async addToCart(product) {
@@ -42,8 +40,9 @@ class User {
 
   // deleteFromCart() {}
 
-  // search(product) {
-  // db.getCollection('users').find({ name: 'product' })
+  search(product) {
+    this.product.find({ image: `${'product'}` })
+  }
 
   viewOffers() {
     return this.products
